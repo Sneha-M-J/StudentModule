@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.nsa.entity.Student;
+import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.repository.IStudentRepository;
 
 @Service
@@ -24,12 +25,19 @@ public class StudentServiceImpl implements IStudentService
 	public Student editStudent(String userId,Student student)
 	{
 		Student stu=iStudentRepository.findByUserId(userId);
-		stu.setMobile(student.getMobile());
-		stu.setEmail(student.getEmail());
-		stu.setAddress(student.getAddress());
-		stu.setCity(student.getCity());
-		stu.setAadhar(student.getAadhar());
-		return iStudentRepository.save(stu);
+		if(stu==null)
+		{
+			throw new IdNotFoundException();
+		}
+		else
+		{
+			stu.setMobile(student.getMobile());
+			stu.setEmail(student.getEmail());
+			stu.setAddress(student.getAddress());
+			stu.setCity(student.getCity());
+			stu.setAadhar(student.getAadhar());
+			return iStudentRepository.save(stu);
+		}
 	}
 
 	@Override
@@ -42,7 +50,14 @@ public class StudentServiceImpl implements IStudentService
 	public Student findByStudentId(int studentId) 
 	{
 		Student stu=iStudentRepository.findByStudentId(studentId);
-		return stu;
+		if(stu==null)
+		{
+			throw new IdNotFoundException();
+		}
+		else
+		{
+			return stu;
+		}
 	}
 
 }

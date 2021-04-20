@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.nsa.entity.Student;
+import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.service.IStudentService;
 
 import io.swagger.annotations.Api;
@@ -36,9 +37,15 @@ public class StudentController
 	@PutMapping(value="/editStudent/{userId}")
 	public ResponseEntity<Object> editStudent(@PathVariable String userId,@RequestBody Student student)
 	{
-		iStudentService.editStudent(userId, student);
-		return new ResponseEntity<Object>("Edit Successfull",HttpStatus.OK);
-		
+		try
+		{
+			iStudentService.editStudent(userId, student);
+			return new ResponseEntity<Object>("Edit Successfull",HttpStatus.OK);
+		}
+		catch(IdNotFoundException exception)
+		{
+			throw new IdNotFoundException("User Id does not exist");
+		}
 	}
 	
 	@GetMapping(value="/getAllStudents")
@@ -50,7 +57,14 @@ public class StudentController
 	@GetMapping(value="/findByStudentId/{studentId}")
 	public Student findByStudentId(@PathVariable int studentId)
 	{
-		return iStudentService.findByStudentId(studentId);		
+		try
+		{
+			return iStudentService.findByStudentId(studentId);			
+		}
+		catch(IdNotFoundException e)
+		{
+			throw new IdNotFoundException("Student Id Not found");
+		}
 	}
 	
 }
