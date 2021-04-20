@@ -13,9 +13,11 @@ public interface IStudentService
 
 	Student addStudent(Student student);
 	
-	Student editStudent(int userId, Student student);
+	Student editStudent(String userId, Student student);
 	
 	List<Student> getAllStudents();
+	
+	Student findByStudentId(int studentId);
 	
 	//List<Student> getStudentsByInstitute(String name) throws InvalidInstitutionException;
 }

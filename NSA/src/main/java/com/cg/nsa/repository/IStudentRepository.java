@@ -9,7 +9,7 @@ import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.InvalidInstitutionException;
 
 @Repository
-public interface IStudentRepository extends JpaRepository<Student, Integer>
+public interface IStudentRepository extends JpaRepository<Student, String>
 {
 
 	//Student saveStudent(Student student);
@@ -19,4 +19,8 @@ public interface IStudentRepository extends JpaRepository<Student, Integer>
 	//List<Student> fetchAllStudents();
 	
 	//List<Student> fetchStudentsByInstitute(String name) throws InvalidInstitutionException;
+	
+	Student findByUserId(String userId);
+	
+	Student findByStudentId(int studentId);
 }

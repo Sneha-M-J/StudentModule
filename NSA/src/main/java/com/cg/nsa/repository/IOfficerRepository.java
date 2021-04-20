@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.nsa.entity.Officer;
 
 @Repository
-public interface IOfficerRepository extends JpaRepository<Officer, Integer> 
+public interface IOfficerRepository extends JpaRepository<Officer, String> 
 {
 	
 	//Officer saveOfficer(Officer officer);

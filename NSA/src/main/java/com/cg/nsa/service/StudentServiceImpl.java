@@ -21,9 +21,9 @@ public class StudentServiceImpl implements IStudentService
 	}
 
 	@Override
-	public Student editStudent(int userId,Student student)
+	public Student editStudent(String userId,Student student)
 	{
-		Student stu=iStudentRepository.findById(userId).get();
+		Student stu=iStudentRepository.findByUserId(userId);
 		stu.setMobile(student.getMobile());
 		stu.setEmail(student.getEmail());
 		stu.setAddress(student.getAddress());
@@ -36,6 +36,13 @@ public class StudentServiceImpl implements IStudentService
 	public List<Student> getAllStudents() 
 	{
 		return iStudentRepository.findAll();
+	}
+
+	@Override
+	public Student findByStudentId(int studentId) 
+	{
+		Student stu=iStudentRepository.findByStudentId(studentId);
+		return stu;
 	}
 
 }
