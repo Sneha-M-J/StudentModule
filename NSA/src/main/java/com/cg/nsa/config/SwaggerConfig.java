@@ -26,11 +26,11 @@ public class SwaggerConfig {
     }
     private ApiInfo metaData() {
         ApiInfo apiInfo = new ApiInfo(
-                "product",
-                "product details end points",
+                "Student",
+                "Student details end points",
                 "1.0",
                 "Terms of service",
-                new Contact("cpagemini", "", "myemail@gmail.com"),
+                new Contact("Sneha M J", "", "snehamj2@gmail.com"),
                "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0");
         return apiInfo;
