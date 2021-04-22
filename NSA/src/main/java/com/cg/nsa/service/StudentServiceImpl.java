@@ -8,13 +8,19 @@ import org.springframework.stereotype.Service;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.repository.IStudentRepository;
-
+/**
+ * 
+ * @author Sneha.M.J
+ *
+ */
 @Service
 public class StudentServiceImpl implements IStudentService
 {
 	@Autowired
 	IStudentRepository iStudentRepository;
-	
+	/**
+	 * 
+	 */
 	@Override
 	public Student addStudent(Student student) 
 	{
