@@ -16,8 +16,17 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+/**
+ * 
+ * @author Sneha.M.J
+ * Version: 1.0
+ * Description: This is the Student Entity Class
+ * Created date: 20-04-2021
+ */
 
 @Entity
 @Table(name="student10")
@@ -65,7 +74,22 @@ public class Student extends User
 	@Size(min = 12,max=12,message = "Aadhar no should consist of 12 digits")
 	private String aadhar;
 	
-	
+	/**
+	 * Parameterized Constructor
+	 * 
+	 * @param userId - User Id of the user
+	 * @param password - Password of the user to login
+	 * @param role - Role of the user (here Student)
+	 * @param studentId - Student Id 
+	 * @param fullName - Student's Full Name
+	 * @param birthdate - Student's Date of Birth
+	 * @param gender - Student's gender
+	 * @param mobile - Student's Phone no 
+	 * @param email - Student's Email ID
+	 * @param address - Student's Residential Address
+	 * @param city - City where Student lives
+	 * @param aadhar - Student's Aadhar card number
+	 */
 	public Student(String userId, String password, String role, @Range(min = 1, max = 200) int studentId,
 			@NotEmpty(message = "Full Name cannot be empty") String fullName, @Past LocalDate birthdate,
 			@NotEmpty(message = "Gender cannot be empty") String gender,
@@ -86,16 +110,28 @@ public class Student extends User
 		this.aadhar = aadhar;
 	}
 
-	
+	/**
+	 * Parameterized Constructor
+	 * 
+	 * @param userId
+	 * @param password
+	 * @param role
+	 */
 	public Student(String userId, String password, String role) {
 		super(userId, password, role);
 	}
 
+	/**
+	 * Non Parameterized Constructor
+	 */
 	public Student() {
 		super();
 	}
 
 
+	/**
+	 * Getters and Setters
+	 */
 	public int getStudentId() {
 		return studentId;
 	}
@@ -185,12 +221,83 @@ public class Student extends User
 		this.aadhar = aadhar;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Student [studentId=" + studentId + ", fullName=" + fullName + ", birthdate=" + birthdate + ", gender="
 				+ gender + ", mobile=" + mobile + ", email=" + email + ", address=" + address + ", city=" + city
 				+ ", aadhar=" + aadhar + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((aadhar == null) ? 0 : aadhar.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((birthdate == null) ? 0 : birthdate.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((mobile == null) ? 0 : mobile.hashCode());
+		result = prime * result + studentId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (aadhar == null) {
+			if (other.aadhar != null)
+				return false;
+		} else if (!aadhar.equals(other.aadhar))
+			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (birthdate == null) {
+			if (other.birthdate != null)
+				return false;
+		} else if (!birthdate.equals(other.birthdate))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (fullName == null) {
+			if (other.fullName != null)
+				return false;
+		} else if (!fullName.equals(other.fullName))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
+		if (mobile == null) {
+			if (other.mobile != null)
+				return false;
+		} else if (!mobile.equals(other.mobile))
+			return false;
+		if (studentId != other.studentId)
+			return false;
+		return true;
 	}	
+	
+	
 	
 }
