@@ -27,13 +27,14 @@ import com.cg.nsa.service.IStudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/**
+/*************************************************************
  * 
  * @author Sneha.M.J
  * Version: 1.0
  * Description: This is the Student Controller Class
  * Created date: 20-04-2021
- */
+ * 
+ *************************************************************/
 
 @Api("Student Controller")
 @RestController
@@ -43,13 +44,14 @@ public class StudentController
 	@Autowired
 	IStudentService iStudentService;
 	
-	/**
+	/**********************************************************************************************
 	 * 
 	 * @param student
 	 * @param bindingResult
 	 * @return - This method inserts a new Student record and returns the response accordingly.
 	 * @throws - This method can throw ValidationException.
-	 */
+	 * 
+	 **********************************************************************************************/
 	@ApiOperation("Add New Student")
 	@PostMapping(value="/addStudent")
 	public ResponseEntity<String> addStudent(@Valid @RequestBody Student student,BindingResult bindingResult)
@@ -69,14 +71,15 @@ public class StudentController
 	}
 	
 	
-	/**
+	/*******************************************************************************************************
 	 * 
 	 * @param userId
 	 * @param student
 	 * @param bindingResult
 	 * @return - This method edits an already existing Student Record and returns the response accordingly.
 	 * @throws - This method can throw ValidationException and IdNotFoundException.
-	 */
+	 * 
+	 *******************************************************************************************************/
 	@ApiOperation("Edit Student")
 	@PutMapping(value="/editStudent/{userId}")
 	public ResponseEntity<Object> editStudent(@PathVariable String userId,@Valid @RequestBody Student student,BindingResult bindingResult )
@@ -103,10 +106,11 @@ public class StudentController
 	}
 	
 	
-	/**
+	/************************************************************************************
 	 * 
 	 * @return - This method retrieves all the student records and returns the same.
-	 */
+	 * 
+	 ************************************************************************************/
 	@ApiOperation("Get all Students")
 	@GetMapping(value="/getAllStudents")
 	public List<Student> getAllStudents()
@@ -115,12 +119,13 @@ public class StudentController
 	}
 	
 	
-	/**
+	/********************************************************************************************
 	 * 
 	 * @param studentId
 	 * @return - This method retrieves and returns the student record based on the Student Id.
 	 * @throws - This method can throw IdNotFoundException.
-	 */
+	 * 
+	 ********************************************************************************************/
 	@ApiOperation("Find By StudentId")
 	@GetMapping(value="/findByStudentId/{studentId}")
 	public Student findByStudentId(@PathVariable int studentId)

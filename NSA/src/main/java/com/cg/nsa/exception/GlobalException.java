@@ -5,22 +5,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-/**
+/**********************************************************************
  * 
  * @author Sneha.M.J
  * Version 1.0
  * Description This is GlobalException class.
  * Created date: 21-04-2021
- */
+ * 
+ *********************************************************************/
 
 @RestControllerAdvice
 public class GlobalException 
 {
-	/**
+	/***************************************
 	 * 
 	 * @param exception
 	 * @return - error messages
-	 */
+	 *
+	 **************************************/
 	@ExceptionHandler(IdNotFoundException.class)
 	public ResponseEntity<Object> handleException(IdNotFoundException exception)
 	{
@@ -28,11 +30,12 @@ public class GlobalException
 	}
 	
 	
-	/**
+	/***************************************
 	 * 
 	 * @param exception
 	 * @return - error messages
-	 */
+	 * 
+	 ***************************************/
 	@ExceptionHandler(ValidationException.class)
 	public ResponseEntity<Object> handleException(ValidationException exception)
 	{

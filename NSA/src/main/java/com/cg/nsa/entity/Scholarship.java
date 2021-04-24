@@ -28,9 +28,11 @@ public class Scholarship
 	private String appStatus;		// Pending/Approved/Rejected
 	private String approval;		// Pending/Granted
 	@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "StudentUserId")
 	@JoinColumn(name = "userId")
 	private List<Student> studentList;
 	@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "InstituteUserId")
 	@JoinColumn(name = "userId")
 	private List<Institution> instituteList;
 	

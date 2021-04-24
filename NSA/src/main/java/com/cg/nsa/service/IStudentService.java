@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.InvalidInstitutionException;
 
-/**
+/*************************************************************************
  * 
  * @author Sneha.M.J
  * Version: 1.0
  * Description: This is the Student Service Interface.
  * Created date: 20-04-2021
- */
+ * 
+ *************************************************************************/
 
 @Service
 public interface IStudentService 

@@ -4,8 +4,10 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -20,13 +22,14 @@ import org.springframework.context.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/**
+/***************************************************************
  * 
  * @author Sneha.M.J
  * Version: 1.0
  * Description: This is the Student Entity Class
  * Created date: 20-04-2021
- */
+ * 
+ **************************************************************/
 
 @Entity
 @Table(name="student10")
@@ -35,7 +38,9 @@ public class Student extends User
 {
 	//@Id
 	@Column(name = "studentId")
-	@Range(min = 1,max = 200)
+	@Range(min = 1,max =200)
+//	@SequenceGenerator(name="myStudent",sequenceName = "myStudentSequence",initialValue = 1,allocationSize = 10)
+//	@GeneratedValue(generator = "myStudent")
 	private int studentId;
 	
 	@Column(name = "fullName")
@@ -74,7 +79,8 @@ public class Student extends User
 	@Size(min = 12,max=12,message = "Aadhar no should consist of 12 digits")
 	private String aadhar;
 	
-	/**
+	/*********************************************************************
+	 * 
 	 * Parameterized Constructor
 	 * 
 	 * @param userId - User Id of the user
@@ -89,7 +95,10 @@ public class Student extends User
 	 * @param address - Student's Residential Address
 	 * @param city - City where Student lives
 	 * @param aadhar - Student's Aadhar card number
-	 */
+	 * 
+	 *********************************************************************/
+	
+	
 	public Student(String userId, String password, String role, @Range(min = 1, max = 200) int studentId,
 			@NotEmpty(message = "Full Name cannot be empty") String fullName, @Past LocalDate birthdate,
 			@NotEmpty(message = "Gender cannot be empty") String gender,
@@ -109,29 +118,37 @@ public class Student extends User
 		this.city = city;
 		this.aadhar = aadhar;
 	}
-
-	/**
+	
+	
+	/***************************************
+	 * 
 	 * Parameterized Constructor
 	 * 
 	 * @param userId
 	 * @param password
 	 * @param role
-	 */
+	 * 
+	 **************************************/
 	public Student(String userId, String password, String role) {
 		super(userId, password, role);
 	}
 
-	/**
+	
+	/**************************************
+	 * 
 	 * Non Parameterized Constructor
-	 */
+	 * 
+	 **************************************/
 	public Student() {
 		super();
 	}
 
 
-	/**
+	/**************************************
+	 * 
 	 * Getters and Setters
-	 */
+	 * 
+	 **************************************/
 	public int getStudentId() {
 		return studentId;
 	}
