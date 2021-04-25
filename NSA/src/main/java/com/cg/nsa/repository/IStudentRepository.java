@@ -3,7 +3,6 @@ package com.cg.nsa.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cg.nsa.entity.Student;
@@ -20,18 +19,13 @@ import com.cg.nsa.exception.InvalidInstitutionException;
 
 @Repository
 public interface IStudentRepository extends JpaRepository<Student, String>
-{
-
-	//Student saveStudent(Student student);
-	
-	//Student updateStudent(Student student);
-	
-	//List<Student> fetchAllStudents();
-	
-	//@Query(value = "Select * from student10 where student_id in (select student_user_id from scholarship10 where name=:InstitutionName")
-	//List<Student> fetchStudentsByInstitute(String InstitutionName); //throws InvalidInstitutionException;
+{	
+//	@Query(value= "select * from student10 where institution_code in(select user_id from institution10 where name=?1)", nativeQuery = true)
+//    List<Student> getStudentsByInstitute(String institutionName); //throws InvalidInstitutionException;
 	
 	Student findByUserId(String userId);
 	
 	Student findByStudentId(int studentId);
+	
+	List<Student> findByInstitutionUserId(String userId);
 }

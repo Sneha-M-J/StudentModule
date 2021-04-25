@@ -19,12 +19,12 @@ class NationalScholarshipAppApplicationTests
 	@Autowired
 	IStudentService service;
 	
-	@Test
-	void testAddStudent1() 
-	{
-		Student student1=new Student("stu3", "srujan", "Student", 3, "Srujan M J",LocalDate.of(2003, 12,03), "male","9876564532","srujanmj2@gmail.com","Hebbal","Bangalore","453432678965");
-	    assertEquals(student1,service.addStudent(student1));
-	}
+//	@Test
+//	void testAddStudent1() 
+//	{
+//		Student student1=new Student("stu3", "srujan", "Student", 3, "Srujan M J",LocalDate.of(2003, 12,03), "male","9876564532","srujanmj2@gmail.com","Hebbal","Bangalore","453432678965");
+//	    assertEquals(student1,service.addStudent(student1));
+//	}
 	
 //	@Test
 //	void testAddStudent2() 

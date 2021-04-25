@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.nsa.entity.Institution;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
+import com.cg.nsa.exception.InvalidInstitutionException;
+import com.cg.nsa.repository.IInstituteRepository;
 import com.cg.nsa.repository.IStudentRepository;
 
 /****************************************************************************************************************
@@ -24,6 +27,9 @@ public class StudentServiceImpl implements IStudentService
 	@Autowired
 	IStudentRepository iStudentRepository;
 	
+	@Autowired
+	IInstituteRepository iInstituteRepository;
+	
 	/********************************************************************************
 	 * 
 	 * @param student
@@ -33,8 +39,11 @@ public class StudentServiceImpl implements IStudentService
 	@Override
 	public Student addStudent(Student student) 
 	{
+		student.updateAppStatus("Pending");
+		student.updateApproval("Pending");
 		return iStudentRepository.save(student);
 	}
+
 
 	
 	/************************************************************************************************
@@ -60,6 +69,7 @@ public class StudentServiceImpl implements IStudentService
 			stu.setAddress(student.getAddress());
 			stu.setCity(student.getCity());
 			stu.setAadhar(student.getAadhar());
+			stu.setPassword(student.getPassword());
 			return iStudentRepository.save(stu);
 		}
 	}
@@ -78,7 +88,6 @@ public class StudentServiceImpl implements IStudentService
 
 	
 	/*******************************************************************************************
-	 * 
 	 * 
 	 * @param studentId
 	 * @return - This method retrieves and returns the student record based on the Student Id.
@@ -99,4 +108,56 @@ public class StudentServiceImpl implements IStudentService
 		}
 	}
 
+
+	/*******************************************************************************************************************
+	 * 
+	 * @param studentId
+	 * @param institutionName
+	 * @return - This method edits the institution details for the student and returns the Updated Student record.
+	 * 
+	 ******************************************************************************************************************/
+
+	@Override
+	public Student updateInstitutionDetails(int studentId, String institutionName) 
+	{
+		Student student = iStudentRepository.findByStudentId(studentId);
+		if(student==null)
+		{
+			throw new IdNotFoundException();
+		}
+		Institution institute = iInstituteRepository.findByName(institutionName);
+		if(institute==null)
+		{
+			throw new InvalidInstitutionException();
+		}
+		student.updateInstitution(institute);		
+		return iStudentRepository.save(student);
+	}
+	
+	
+	/*****************************************************************************************
+	 * 
+	 * @param name
+	 * @return - Returns a list of students belonging to a particular Institution.
+	 * 
+	 ****************************************************************************************/
+	@Override
+	public List<Student> getStudentsByInstitute(String name) 
+	{
+		Institution institute = iInstituteRepository.findByName(name);
+		if(institute==null)
+		{
+			throw new InvalidInstitutionException();
+		}
+		List<Student> studList = iStudentRepository.findByInstitutionUserId(institute.getUserId());
+		return studList;
+	}
+	
+//	@Override
+//	public List<Student> getStudentsByInstitute(String institutionName) 
+//	{
+//		 List<Student> stulist=(List<Student>) iStudentRepository.getStudentsByInstitute(institutionName);
+//		 return stulist;
+//	}
+	
 }

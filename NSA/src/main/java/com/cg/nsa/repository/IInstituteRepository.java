@@ -8,19 +8,13 @@ import org.springframework.stereotype.Repository;
 import com.cg.nsa.entity.Institution;
 import com.cg.nsa.exception.InvalidInstitutionException;
 
+
 @Repository
 public interface IInstituteRepository extends JpaRepository<Institution, String>
 {
 
-	//Institution saveInstitute(Institution institute);
+	Institution findByUserId(String userId);
 	
-	//Institution updateInstitute(Institution institute);
+	Institution findByName(String name);
 	
-	//Institution statusUpdate(Institution institute);
-	
-	//Institution fetchInstitute(int code) throws InvalidInstitutionException;
-	
-	//List<Institution> fetchAllInstitutes();
-	
-	//List<Institution> fetchInstitutesByState(String state);
 }

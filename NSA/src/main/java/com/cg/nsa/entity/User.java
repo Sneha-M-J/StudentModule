@@ -1,12 +1,21 @@
+/********************************************************
+ 
+ * @author Rajkumar V
+ * version: 1.0
+ * Description: This is the user entity class 
+ * Created date: 20-04-2021
+ 
+ * ******************************************************
+ */
 package com.cg.nsa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Entity
 @Table(name="user10")
@@ -14,15 +23,23 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class User 
 {
 	@Id
+	@Column(name="userId")
 	private String userId;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="role")
 	private String role;
+	
+	private int loggedin;
 	
 	public User(String userId, String password, String role) {
 		super();
 		this.userId = userId;
 		this.password = password;
 		this.role = role;
+		this.loggedin=0;
 	}
 
 	public User() {
@@ -52,8 +69,23 @@ public class User
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-	@Override
+	
+	
+	public int login()
+	{
+		return this.loggedin=1;
+		}
+	
+     public int isLogin()
+     {
+    	 return this.loggedin;
+    	 
+     }
+     public void logout()
+ 	{
+ 		this.loggedin=0;
+ 	}
+     
 	public String toString() {
 		return "User [userId=" + userId + ", password=" + password + ", role=" + role + "]";
 	}
@@ -62,6 +94,7 @@ public class User
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + loggedin;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
@@ -77,6 +110,8 @@ public class User
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (loggedin != other.loggedin)
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -94,7 +129,6 @@ public class User
 			return false;
 		return true;
 	}
-	
 	
 	
 }

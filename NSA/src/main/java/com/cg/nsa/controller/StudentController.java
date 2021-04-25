@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
+import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.ValidationException;
 import com.cg.nsa.service.IStudentService;
 
@@ -43,6 +43,7 @@ public class StudentController
 {
 	@Autowired
 	IStudentService iStudentService;
+	
 	
 	/**********************************************************************************************
 	 * 
@@ -139,5 +140,61 @@ public class StudentController
 			throw new IdNotFoundException("Student Id Not found");
 		}
 	}
+	
+	
+	/****************************************************************************************************************
+	 * 
+	 * @param studentId
+	 * @param institutionName
+	 * @return - This method edits the institution details for the student and returns the response accordingly.
+	 * 
+	 ***************************************************************************************************************/
+	@ApiOperation("Edit Institution Details")
+	@PutMapping("/editInstitutionDetails/{studentId}/{institutionName}")
+	public ResponseEntity<Object> editInstitutionDetails(@PathVariable int studentId, @PathVariable String institutionName)
+	{
+		try
+		{
+			iStudentService.updateInstitutionDetails(studentId, institutionName);
+			return new ResponseEntity<Object>("Edited successfully", HttpStatus.OK);
+		}
+		catch(IdNotFoundException exception)
+		{
+			throw new IdNotFoundException("Student Id not found");
+		}
+		catch(InvalidInstitutionException exception)
+		{
+			throw new InvalidInstitutionException("Invalid Institution Name");
+		}
+	}
+	
+	
+	/*****************************************************************************************
+	 * 
+	 * @param institutionName
+	 * @return - Returns a list of students belonging to a particular Institution.
+	 * 
+	 ****************************************************************************************/
+	@GetMapping("/getByInstitutionName/{institutionName}")
+	public List<Student> getStudentsByInstituteName(@PathVariable String institutionName)
+	{
+		try
+		{
+			return iStudentService.getStudentsByInstitute(institutionName);
+		}
+		catch(InvalidInstitutionException exception)
+		{
+			throw new InvalidInstitutionException("Invalid Institution Name");
+		}
+	}
+	
+	
+//	@ApiOperation("Get all Students from a particular institution")
+//	@GetMapping(value="/getStudentsByInstitute/{institutionName}")
+//	public List<Student> getStudentsByInstitute(@PathVariable String institutionName)
+//	{
+//		List<Student> stulist=(List<Student>) iStudentService.getStudentsByInstitute(institutionName);
+//		return stulist;
+//	}
 	
 }

@@ -28,5 +28,7 @@ public interface IStudentService
 	
 	Student findByStudentId(int studentId);
 	
-	//List<Student> getStudentsByInstitute(String name) throws InvalidInstitutionException;
+	Student updateInstitutionDetails(int studentId, String institutionName);
+	
+	List<Student> getStudentsByInstitute(String name); //throws InvalidInstitutionException;
 }

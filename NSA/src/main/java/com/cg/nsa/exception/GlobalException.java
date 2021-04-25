@@ -41,4 +41,17 @@ public class GlobalException
 	{
 		return new ResponseEntity<Object>(exception.getMessages(),HttpStatus.NOT_FOUND);
 	}
+	
+	
+	/**************************************
+	 * 
+	 * @param exception
+	 * @return - error messages
+	 *
+	 *************************************/
+	@ExceptionHandler(InvalidInstitutionException.class)
+	public ResponseEntity<Object> handleException(InvalidInstitutionException exception)
+	{
+		return new ResponseEntity<Object>(exception.getMessage(),HttpStatus.NOT_FOUND);
+	}
 }
