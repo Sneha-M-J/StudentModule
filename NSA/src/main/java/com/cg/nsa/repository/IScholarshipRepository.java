@@ -14,4 +14,6 @@ public interface IScholarshipRepository extends JpaRepository<Scholarship, Integ
 	//Scholarship statusUpdate(Scholarship scholarship);
 
 	//List<Scholarship> fetchAllScholarships();
+	
+	Scholarship findByScholarshipName(String scholarshipName);
 }

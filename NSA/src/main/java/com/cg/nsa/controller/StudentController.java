@@ -198,12 +198,18 @@ public class StudentController
 	}
 	
 	
-//	@ApiOperation("Get all Students from a particular institution")
-//	@GetMapping(value="/getStudentsByInstitute/{institutionName}")
-//	public List<Student> getStudentsByInstitute(@PathVariable String institutionName)
-//	{
-//		List<Student> stulist=(List<Student>) iStudentService.getStudentsByInstitute(institutionName);
-//		return stulist;
-//	}
+	/***************************************************************************************************************
+	 * 
+	 * @param studentId
+	 * @param scholarshipId
+	 * @return - This method edits the Scholarship details for the student and returns the response accordingly.
+	 * 
+	 **************************************************************************************************************/
+	@PutMapping("/updateScholarshipDetails/{studentId}/{scholarshipId}")
+	public ResponseEntity<Object> updateScholarshipDetails(@PathVariable int studentId,@PathVariable int scholarshipId) 
+	{
+		iStudentService.updateScholarshipDetails(studentId, scholarshipId);
+		return new ResponseEntity<Object>("Updated successfully", HttpStatus.OK);
+	}
 	
 }

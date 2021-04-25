@@ -3,6 +3,7 @@ package com.cg.nsa.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.nsa.entity.Student;
 
@@ -16,6 +17,7 @@ import com.cg.nsa.entity.Student;
  *************************************************************************/
 
 @Service
+
 public interface IStudentService 
 {
 
@@ -29,5 +31,8 @@ public interface IStudentService
 	
 	Student updateInstitutionDetails(int studentId, String institutionName);
 	
-	List<Student> getStudentsByInstitute(String name); 
+	List<Student> getStudentsByInstitute(String name);
+	
+	@Transactional
+	void updateScholarshipDetails(int studentId, int scholarshipId);
 }

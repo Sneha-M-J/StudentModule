@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.nsa.entity.Institution;
+import com.cg.nsa.entity.Scholarship;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.UniqueElementException;
 import com.cg.nsa.repository.IInstituteRepository;
+import com.cg.nsa.repository.IScholarshipRepository;
 import com.cg.nsa.repository.IStudentRepository;
 
 /****************************************************************************************************************
@@ -30,6 +33,9 @@ public class StudentServiceImpl implements IStudentService
 	
 	@Autowired
 	IInstituteRepository iInstituteRepository;
+	
+	@Autowired
+	IScholarshipRepository iScholarshipRepository;
 	
 	/********************************************************************************
 	 * 
@@ -115,32 +121,6 @@ public class StudentServiceImpl implements IStudentService
 			return stu;
 		}
 	}
-
-
-	/*******************************************************************************************************************
-	 * 
-	 * @param studentId
-	 * @param institutionName
-	 * @return - This method edits the institution details for the student and returns the Updated Student record.
-	 * 
-	 ******************************************************************************************************************/
-
-	@Override
-	public Student updateInstitutionDetails(int studentId, String institutionName) 
-	{
-		Student student = iStudentRepository.findByStudentId(studentId);
-		if(student==null)
-		{
-			throw new IdNotFoundException();
-		}
-		Institution institute = iInstituteRepository.findByName(institutionName);
-		if(institute==null)
-		{
-			throw new InvalidInstitutionException();
-		}
-		student.updateInstitution(institute);		
-		return iStudentRepository.save(student);
-	}
 	
 	
 	/*****************************************************************************************
@@ -160,12 +140,46 @@ public class StudentServiceImpl implements IStudentService
 		List<Student> studList = iStudentRepository.findByInstitutionUserId(institute.getUserId());
 		return studList;
 	}
+
+
+	/*******************************************************************************************************************
+	 * 
+	 * @param studentId
+	 * @param institutionName
+	 * @return - This method edits the institution details for the student and returns the Updated Student record.
+	 * 
+	 ******************************************************************************************************************/
+	@Override
+	public Student updateInstitutionDetails(int studentId, String institutionName) 
+	{
+		Student student = iStudentRepository.findByStudentId(studentId);
+		if(student==null)
+		{
+			throw new IdNotFoundException();
+		}
+		Institution institute = iInstituteRepository.findByName(institutionName);
+		if(institute==null)
+		{
+			throw new InvalidInstitutionException();
+		}
+		student.updateInstitution(institute);		
+		return iStudentRepository.save(student);
+	}
 	
-//	@Override
-//	public List<Student> getStudentsByInstitute(String institutionName) 
-//	{
-//		 List<Student> stulist=(List<Student>) iStudentRepository.getStudentsByInstitute(institutionName);
-//		 return stulist;
-//	}
 	
+	/***************************************************************************************************************
+	 * 
+	 * @param studentId
+	 * @param scholarshipId
+	 * @return - This method edits the Scholarship details for the student and returns the response accordingly.
+	 * 
+	 **************************************************************************************************************/
+
+	@Override
+	@Transactional
+	public void updateScholarshipDetails(int studentId, int scholarshipId) 
+	{
+		iStudentRepository.updateScholarshipDetails(studentId, scholarshipId);
+	}
+
 }

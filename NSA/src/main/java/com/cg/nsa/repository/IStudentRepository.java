@@ -2,7 +2,11 @@ package com.cg.nsa.repository;
 
 import java.util.List;
 
+import org.hibernate.annotations.Subselect;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cg.nsa.entity.Student;
@@ -19,12 +23,15 @@ import com.cg.nsa.entity.Student;
 @Repository
 public interface IStudentRepository extends JpaRepository<Student, String>
 {	
-//	@Query(value= "select * from student10 where institution_code in(select user_id from institution10 where name=?1)", nativeQuery = true)
-//    List<Student> getStudentsByInstitute(String institutionName); //throws InvalidInstitutionException;
-	
 	Student findByUserId(String userId);
 	
 	Student findByStudentId(int studentId);
 	
 	List<Student> findByInstitutionUserId(String userId);
+	
+	
+	@Query(value="update student10 s set s.scholarship_id=:scholarshipId where s.student_id=:studentId", nativeQuery = true)
+	@Modifying
+	void updateScholarshipDetails(@Param("studentId")int studentId,@Param("scholarshipId")int scholarshipId);
+
 }
