@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cg.nsa.entity.Student;
-import com.cg.nsa.exception.InvalidInstitutionException;
 
 /*************************************************************************
  * 
@@ -30,5 +29,5 @@ public interface IStudentService
 	
 	Student updateInstitutionDetails(int studentId, String institutionName);
 	
-	List<Student> getStudentsByInstitute(String name); //throws InvalidInstitutionException;
+	List<Student> getStudentsByInstitute(String name); 
 }

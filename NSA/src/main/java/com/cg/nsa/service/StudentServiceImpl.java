@@ -9,6 +9,7 @@ import com.cg.nsa.entity.Institution;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
+import com.cg.nsa.exception.UniqueElementException;
 import com.cg.nsa.repository.IInstituteRepository;
 import com.cg.nsa.repository.IStudentRepository;
 
@@ -34,16 +35,23 @@ public class StudentServiceImpl implements IStudentService
 	 * 
 	 * @param student
 	 * @return - This method inserts a new Student record and returns the same.
+	 * @throws - This method can throw UniqueElementException.
 	 * 
 	 ********************************************************************************/
 	@Override
 	public Student addStudent(Student student) 
 	{
-		student.updateAppStatus("Pending");
-		student.updateApproval("Pending");
-		return iStudentRepository.save(student);
+		if(iStudentRepository.findByStudentId(student.getStudentId())==null && iStudentRepository.findByUserId(student.getUserId())==null)
+		{
+			student.updateAppStatus("Pending");
+			student.updateApproval("Pending");
+		    return iStudentRepository.save(student);
+		}
+		else
+		{
+			throw new UniqueElementException();
+		}
 	}
-
 
 	
 	/************************************************************************************************

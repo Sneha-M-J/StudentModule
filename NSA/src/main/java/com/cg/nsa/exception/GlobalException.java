@@ -54,4 +54,17 @@ public class GlobalException
 	{
 		return new ResponseEntity<Object>(exception.getMessage(),HttpStatus.NOT_FOUND);
 	}
+	
+	
+	/**************************************
+	 * 
+	 * @param exception
+	 * @return - error messages
+	 *
+	 *************************************/
+	@ExceptionHandler(UniqueElementException.class)
+	public ResponseEntity<Object> handleException(UniqueElementException exception)
+	{
+		return new ResponseEntity<Object>(exception.getMessage(),HttpStatus.NOT_FOUND);
+	}
 }

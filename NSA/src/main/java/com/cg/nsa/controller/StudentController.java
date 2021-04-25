@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
+import com.cg.nsa.exception.UniqueElementException;
 import com.cg.nsa.exception.ValidationException;
 import com.cg.nsa.service.IStudentService;
 
@@ -50,7 +51,7 @@ public class StudentController
 	 * @param student
 	 * @param bindingResult
 	 * @return - This method inserts a new Student record and returns the response accordingly.
-	 * @throws - This method can throw ValidationException.
+	 * @throws - This method can throw ValidationException and UniqueElementException.
 	 * 
 	 **********************************************************************************************/
 	@ApiOperation("Add New Student")
@@ -67,8 +68,15 @@ public class StudentController
 			}
 			throw new ValidationException(errorList);
 		}
-	    iStudentService.addStudent(student);
-		return new ResponseEntity<String>("Added Student Successfully",HttpStatus.OK);
+		try
+		{
+			iStudentService.addStudent(student);
+			return new ResponseEntity<String>("Added Student Successfully",HttpStatus.OK);	
+		}
+		catch(UniqueElementException exception)
+		{
+			throw new UniqueElementException("Student Id/ User Id already Exists");
+		}
 	}
 	
 	
@@ -175,6 +183,7 @@ public class StudentController
 	 * @return - Returns a list of students belonging to a particular Institution.
 	 * 
 	 ****************************************************************************************/
+	@ApiOperation("Get Students by Institution name")
 	@GetMapping("/getByInstitutionName/{institutionName}")
 	public List<Student> getStudentsByInstituteName(@PathVariable String institutionName)
 	{
