@@ -9,6 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Range;
+
+/*******************************************************************************************************************
+ * 
+ * @author ANKITA
+ * Version: 1.0
+ * Description: This is the Scholarship Entity Class
+ * Created date: 19-04-2021
+ * 
+ ******************************************************************************************************************/
 
 @Entity
 @Table(name="scholarship10")
@@ -18,11 +30,19 @@ public class Scholarship
 	@Column(name = "scholarshipId")
 	private int scholarshipId;
 	
+	@NotEmpty(message="Scholarship Name cannot be empty ")
 	@Column(name = "scholarshipName")
 	private String scholarshipName;		//Prime Minister Scholarship Scheme/SwarnaJayanti Fellowships Scheme, etc..
 	
+	@Column(name = "sscScoreCriteria")
+	@Range(min = (long) 0.0,max = (long) 100.0, message = "Ssc score should be between 0 and 100")
 	private double sscScoreCriteria;
+	
+	@Column(name = "hscScoreCriteria")
+	@Range(min = (long) 0.0,max = (long) 100.0, message = "Hsc score should be between 0 and 100")
 	private double hscScoreCriteria;
+	
+	@Column(name = "familyIncomeCriteria")
 	private double familyIncomeCriteria;
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -33,20 +53,19 @@ public class Scholarship
 	@JoinColumn(name = "scholarshipId")
 	private List<Institution> instituteList;
 	
-	public Scholarship() {
-		// TODO Auto-generated constructor stub
+	public Scholarship() 
+	{
+		
 	}
 
 	public Scholarship(int scholarshipId, String scholarshipName, double sscScoreCriteria, double hscScoreCriteria,
-			double familyIncomeCriteria, List<Student> studentList, List<Institution> instituteList) {
+			double familyIncomeCriteria) {
 		super();
 		this.scholarshipId = scholarshipId;
 		this.scholarshipName = scholarshipName;
 		this.sscScoreCriteria = sscScoreCriteria;
 		this.hscScoreCriteria = hscScoreCriteria;
 		this.familyIncomeCriteria = familyIncomeCriteria;
-		this.studentList = studentList;
-		this.instituteList = instituteList;
 	}
 
 	public int getScholarshipId() {
@@ -89,19 +108,19 @@ public class Scholarship
 		this.familyIncomeCriteria = familyIncomeCriteria;
 	}
 
-	public List<Student> getStudentList() {
+	public List<Student> findStudentList() {
 		return studentList;
 	}
 
-	public void setStudentList(List<Student> studentList) {
+	public void updateStudentList(List<Student> studentList) {
 		this.studentList = studentList;
 	}
 
-	public List<Institution> getInstituteList() {
+	public List<Institution> findInstituteList() {
 		return instituteList;
 	}
 
-	public void setInstituteList(List<Institution> instituteList) {
+	public void updateInstituteList(List<Institution> instituteList) {
 		this.instituteList = instituteList;
 	}
 
@@ -166,8 +185,4 @@ public class Scholarship
 		return true;
 	}
 
-	
-	
-	
-	
 }

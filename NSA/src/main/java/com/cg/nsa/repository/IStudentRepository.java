@@ -2,7 +2,6 @@ package com.cg.nsa.repository;
 
 import java.util.List;
 
-import org.hibernate.annotations.Subselect;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,14 +10,14 @@ import org.springframework.stereotype.Repository;
 
 import com.cg.nsa.entity.Student;
 
-/**********************************************************************************************
+/**********************************************************************************************************
  * 
  * @author Sneha.M.J
  * Version: 1.0
  * Description: This is the Student Repository Interface. It extends the JpaRepository.
- * Created date: 20-04-2021
+ * Created date: 19-04-2021
  * 
- **********************************************************************************************/
+ *********************************************************************************************************/
 
 @Repository
 public interface IStudentRepository extends JpaRepository<Student, String>

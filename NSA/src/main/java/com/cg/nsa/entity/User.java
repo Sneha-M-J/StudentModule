@@ -1,12 +1,3 @@
-/********************************************************
- 
- * @author Rajkumar V
- * version: 1.0
- * Description: This is the user entity class 
- * Created date: 20-04-2021
- 
- * ******************************************************
- */
 package com.cg.nsa.entity;
 
 import javax.persistence.Column;
@@ -15,7 +6,16 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
+/*******************************************************************************************************************
+ * 
+ * @author Rajkumar V
+ * Version: 1.0
+ * Description: This is the User Entity Class
+ * Created date: 19-04-2021
+ * 
+ ******************************************************************************************************************/
 
 @Entity
 @Table(name="user10")
@@ -24,12 +24,15 @@ public class User
 {
 	@Id
 	@Column(name="userId")
+	@NotEmpty(message="userId cannot be empty")
 	private String userId;
 	
 	@Column(name="password")
+	@NotEmpty(message="password cannot be empty")
 	private String password;
 	
 	@Column(name="role")
+	@NotEmpty(message="Role cannot be empty")
 	private String role;
 	
 	private int loggedin;
@@ -71,18 +74,15 @@ public class User
 	}
 	
 	
-	public int login()
-	{
+	public int login() {
 		return this.loggedin=1;
-		}
+	}
 	
-     public int isLogin()
-     {
+    public int isLogin() {
     	 return this.loggedin;
-    	 
-     }
-     public void logout()
- 	{
+    }
+    
+    public void logout() {
  		this.loggedin=0;
  	}
      

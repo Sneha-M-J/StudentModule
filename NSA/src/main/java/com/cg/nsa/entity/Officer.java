@@ -2,24 +2,22 @@ package com.cg.nsa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+/*******************************************************************************************************************
+ * 
+ * @author SNEHA V
+ * Version: 1.0
+ * Description: This is the Officer Entity Class
+ * Created date: 19-04-2021
+ * 
+ ******************************************************************************************************************/
+
 @Entity
 @Table(name="officer10")
 @PrimaryKeyJoinColumn(name="userId")
-
-/*********************************************************************
- * 
- * @author SNEHA V
- * Version 1.0
- * Description this is a controller class
- * created date 22-04-2021
- *
- *********************************************************************/
-
 public class Officer extends User 
 {
 	//@Id

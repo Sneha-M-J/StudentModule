@@ -1,21 +1,24 @@
 package com.cg.nsa.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-/**
- * Description Entity class for ministry
+
+/*******************************************************************************************************************
+ * 
  * @author VASUSAI
- *
- */
+ * Version: 1.0
+ * Description: This is the Ministry Entity Class
+ * Created date: 19-04-2021
+ * 
+ ******************************************************************************************************************/
+
 @Entity
 @Table(name="ministry10")
 @PrimaryKeyJoinColumn(name="userId")
 public class Ministry extends User 
 {
-	//@Id
 	@NotBlank(message="portfolio cannot be empty") //Validation
 	private String portfolio;
 

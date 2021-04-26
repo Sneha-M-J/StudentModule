@@ -8,13 +8,13 @@ import java.util.List;
  * @author Sneha.M.J
  * Version 1.0
  * Description This is Custom ValidationException which extends the RuntimeException.
- * Created date: 22-04-2021
+ * Created date: 23-04-2021
  * 
  ******************************************************************************************/
 
 public class ValidationException extends RuntimeException
 {
-	List<String> messages=new ArrayList<String>();
+	List<String> messages=new ArrayList<>();
 	
 	/*******************************************
 	 * 

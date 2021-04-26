@@ -17,54 +17,62 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalException 
 {
-	/***************************************
+	
+	/*****************************************************
 	 * 
+	 * Handles IdNotFoundException
 	 * @param exception
 	 * @return - error messages
 	 *
-	 **************************************/
+	 ****************************************************/
 	@ExceptionHandler(IdNotFoundException.class)
 	public ResponseEntity<Object> handleException(IdNotFoundException exception)
 	{
-		return new ResponseEntity<Object>(exception.getMessage(),HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
 	}
 	
 	
-	/***************************************
+	
+	/*****************************************************
 	 * 
+	 * Handles ValidationException
 	 * @param exception
 	 * @return - error messages
 	 * 
-	 ***************************************/
+	*****************************************************/
 	@ExceptionHandler(ValidationException.class)
 	public ResponseEntity<Object> handleException(ValidationException exception)
 	{
-		return new ResponseEntity<Object>(exception.getMessages(),HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exception.getMessages(),HttpStatus.NOT_FOUND);
 	}
 	
 	
-	/**************************************
+	
+	/*****************************************************
 	 * 
+	 * Handles InvalidInstitutionException
 	 * @param exception
 	 * @return - error messages
 	 *
-	 *************************************/
+	 *****************************************************/
 	@ExceptionHandler(InvalidInstitutionException.class)
 	public ResponseEntity<Object> handleException(InvalidInstitutionException exception)
 	{
-		return new ResponseEntity<Object>(exception.getMessage(),HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
 	}
 	
 	
-	/**************************************
+	
+	/*****************************************************
 	 * 
+	 * Handles UniqueElementException
 	 * @param exception
 	 * @return - error messages
 	 *
-	 *************************************/
+	 *****************************************************/
 	@ExceptionHandler(UniqueElementException.class)
 	public ResponseEntity<Object> handleException(UniqueElementException exception)
 	{
-		return new ResponseEntity<Object>(exception.getMessage(),HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
 	}
 }

@@ -7,20 +7,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.nsa.entity.Student;
 
-/*************************************************************************
+/******************************************************************************************************
  * 
  * @author Sneha.M.J
  * Version: 1.0
  * Description: This is the Student Service Interface.
  * Created date: 20-04-2021
  * 
- *************************************************************************/
+ *****************************************************************************************************/
 
 @Service
-
 public interface IStudentService 
 {
-
 	Student addStudent(Student student);
 	
 	Student editStudent(String userId, Student student);
@@ -29,9 +27,9 @@ public interface IStudentService
 	
 	Student findByStudentId(int studentId);
 	
-	Student updateInstitutionDetails(int studentId, String institutionName);
+	Student editInstitutionDetails(int studentId, String institutionName);
 	
-	List<Student> getStudentsByInstitute(String name);
+	List<Student> getStudentsByInstituteName(String name);
 	
 	@Transactional
 	void updateScholarshipDetails(int studentId, int scholarshipId);
